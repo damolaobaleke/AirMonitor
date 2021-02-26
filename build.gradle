@@ -10,9 +10,24 @@ buildscript {
     }
     dependencies {
 
-        classpath "com.android.tools.build:gradle:7.0.0-alpha07"
+        classpath "com.android.tools.build:gradle:4.0.0"
         classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.21'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+
+}
+
+def apikeyPropertiesFile = rootProject.file("apikey.properties")
+def apikeyProperties = new Properties()
+apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
+
+android {
+
+    defaultConfig {
+
+        // should correspond to key/value pairs inside the file
+        buildConfigField("String", "CONSUMER_KEY", apikeyProperties['CONSUMER_KEY'])
+        buildConfigField("String", "CONSUMER_SECRET", apikeyProperties['CONSUMER_SECRET'])
     }
 }
 

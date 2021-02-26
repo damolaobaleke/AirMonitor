@@ -18,7 +18,8 @@ import com.example.airmonitor.R;
 import com.airmonitor.databinding.ActivityAirQualityNavigationBinding;
 import com.google.android.material.navigation.NavigationView;
 
-public class AirQualityNavigation extends AppCompatActivity {
+public class AirQualityActivity extends AppCompatActivity {
+
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityAirQualityNavigationBinding binding;
