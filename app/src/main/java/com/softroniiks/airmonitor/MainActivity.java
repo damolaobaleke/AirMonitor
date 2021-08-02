@@ -1,10 +1,10 @@
-package com.airmonitor;
+package com.softroniiks.airmonitor;
 
 import android.os.Bundle;
 
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.airmonitor.R;
 
 
 public class MainActivity extends AppCompatActivity {

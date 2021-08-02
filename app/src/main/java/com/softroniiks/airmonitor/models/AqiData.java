@@ -1,4 +1,4 @@
-package com.airmonitor.models;
+package com.softroniiks.airmonitor.models;
 
 public class AqiData {
     String timestamp_utc;

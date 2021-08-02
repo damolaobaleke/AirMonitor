@@ -1,4 +1,4 @@
-package com.airmonitor.views.ui_fragments.home
+package com.softroniiks.airmonitor.views.ui_fragments.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.MutableLiveData

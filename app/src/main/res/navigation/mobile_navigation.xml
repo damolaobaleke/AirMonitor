@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.airmonitor.views.ui_fragments.home.HomeFragment"
+        android:name="com.softroniiks.airmonitor.views.ui_fragments.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.airmonitor.views.ui_fragments.gallery.GalleryFragment"
+        android:name="com.softroniiks.airmonitor.views.ui_fragments.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.airmonitor.views.ui_fragments.slideshow.SlideshowFragment"
+        android:name="com.softroniiks.airmonitor.views.ui_fragments.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
 </navigation>

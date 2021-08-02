@@ -1,4 +1,4 @@
-package com.airmonitor.models;
+package com.softroniiks.airmonitor.models;
 
 import java.util.List;
 

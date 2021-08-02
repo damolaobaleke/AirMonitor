@@ -1,4 +1,4 @@
-package com.airmonitor.models;
+package com.softroniiks.airmonitor.models;
 
 /**This would be based on the Java Api built*/
 public class AirResponseModel {

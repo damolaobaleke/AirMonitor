@@ -1,4 +1,4 @@
-package com.airmonitor.views;
+package com.softroniiks.airmonitor.views;
 
 import android.app.Application;
 import android.content.Context;
@@ -8,9 +8,9 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-import com.airmonitor.models.AqiData;
-import com.airmonitor.models.AqiIndexObject;
-import com.airmonitor.network.AirMonitorApi;
+import com.softroniiks.airmonitor.models.AqiData;
+import com.softroniiks.airmonitor.models.AqiIndexObject;
+import com.softroniiks.airmonitor.network.AirMonitorApi;
 
 import org.jetbrains.annotations.NotNull;
 

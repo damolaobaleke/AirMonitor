@@ -1,10 +1,9 @@
-package com.airmonitor.views.ui_fragments.home;
+package com.softroniiks.airmonitor.views.ui_fragments.home;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,17 +11,20 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.airmonitor.views.R;
-import com.airmonitor.views.databinding.FragmentHomeBinding;
+import com.softroniiks.airmonitor.R;
+
+//import com.softroniiks.airmonitor.views.R;
+//import com.softroniiks.airmonitor.views.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
-    private FragmentHomeBinding binding;
+    //private FragmentHomeBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
 
+        View view  = inflater.inflate(R.layout.fragment_home, container);
 //        binding = FragmentHomeBinding.inflate(inflater, container, false);
 //        View root = binding.getRoot();
 
@@ -33,7 +35,7 @@ public class HomeFragment extends Fragment {
                 //textView.setText(s);
             }
         });
-        //return root;
+        return view;
     }
 
     @Override

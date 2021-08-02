@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.airmonitor">
+    package="com.softroniiks.airmonitor">
 
     <application
         android:allowBackup="true"
@@ -10,16 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AirMonitor">
         <activity
-            android:name="com.airmonitor.views.AirQualityNavigation"
+            android:name="com.softroniiks.airmonitor.views.AirQualityNavigation"
             android:exported="true"
             android:label="@string/title_activity_air_quality_navigation"
             android:theme="@style/Theme.AirMonitor.NoActionBar" />
         <activity
-            android:name="com.airmonitor.SignUpActivity"
+            android:name="com.softroniiks.airmonitor.SignUpActivity"
             android:exported="true"
             android:label="@string/title_activity_sign_up"
             android:theme="@style/Theme.AirMonitor.NoActionBar" />
-        <activity android:name="com.airmonitor.MainActivity">
+        <activity android:name="com.softroniiks.airmonitor.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

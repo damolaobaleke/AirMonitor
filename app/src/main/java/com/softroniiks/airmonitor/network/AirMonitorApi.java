@@ -1,6 +1,6 @@
-package com.airmonitor.network;
+package com.softroniiks.airmonitor.network;
 
-import com.airmonitor.models.AqiIndexObject;
+import com.softroniiks.airmonitor.models.AqiIndexObject;
 
 import java.util.HashMap;
 

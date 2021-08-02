@@ -1,9 +1,10 @@
-package com.airmonitor.views;
+package com.softroniiks.airmonitor.views;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.customview.widget.Openable;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -14,30 +15,29 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.airmonitor.R;
-import com.airmonitor.databinding.ActivityAirQualityNavigationBinding;
+import com.softroniiks.airmonitor.R;
 import com.google.android.material.navigation.NavigationView;
 
 public class AirQualityNavigation extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
-    private ActivityAirQualityNavigationBinding binding;
+    //private ActivityAirQualityNavigationBinding binding;
     AirQualityNavigationViewModel navigationViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityAirQualityNavigationBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        //binding = ActivityAirQualityNavigationBinding.inflate(getLayoutInflater());
+        setContentView(R.layout.activity_air_quality_navigation);
 
-        setSupportActionBar(binding.appBarAirQualityNavigation.toolbar);
+        //setSupportActionBar(binding.appBarAirQualityNavigation.toolbar);
 
         //Initialize View Model
         navigationViewModel = new ViewModelProvider(this).get(AirQualityNavigationViewModel.class);
 
-        DrawerLayout drawer = binding.drawerLayout;
-        NavigationView navigationView = binding.navView;
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.nav_home)

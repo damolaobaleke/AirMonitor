@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/compose-model-1627577590665.xml" value="1.0" />
+        <entry key="../../../../layout/compose-model-1627583859171.xml" value="0.75" />
+        <entry key="../../../../layout/compose-model-1627824220648.xml" value="0.7282282282282282" />
+        <entry key="../../../../layout/compose-model-1627903918139.xml" value="0.758998435054773" />
+        <entry key="../../../../layout/compose-model-1627905099240.xml" value="0.625" />
         <entry key="..\:/AirMonitor/app/src/main/res/layout/activity_main.xml" value="0.22447916666666667" />
         <entry key="..\:/AirMonitor/app/src/main/res/layout/content_air_quality_navigation.xml" value="0.22447916666666667" />
       </map>
