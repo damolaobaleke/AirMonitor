@@ -1,37 +1,59 @@
 package com.softroniiks.airmonitor
 
+import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
+import android.widget.Toast
+import android.widget.Toast.LENGTH_SHORT
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.runtime.Composable
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.material.Typography
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.semantics.Role.Companion.Image
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat.startActivity
 import com.example.airmonitor.ui.theme.AirMonitorTheme
-import com.squareup.picasso.Picasso
+import com.softroniiks.airmonitor.views.AirQualityNavigation
 
 class SignUpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            val painter = painterResource(id = R.drawable.ic_launcher_background)
             AirMonitorTheme {
-                Greeting(Message("Roland", "Two to tango"))
+                Surface(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .fillMaxWidth(),
+                    color = MaterialTheme.colors.primary
+                ) {
+                    Greeting(Message("Roland", "Two to tango"))
+                    ImageCard(title = "Sweet Poison", contentDescription = "Hello",
+                        painter = painter )
+                }
+
             }
         }
 
@@ -41,8 +63,10 @@ class SignUpActivity : AppCompatActivity() {
 @Composable
 fun Greeting(msg: Message) {
     //Text(text = "Hello $name!")
-    Row(modifier = Modifier.padding(all = 8.dp)) {
-        Column {
+    //justify-content-around etc..
+    Row(modifier = Modifier.padding(all = 8.dp), horizontalArrangement = Arrangement.SpaceBetween) {
+        //column 1
+        Column() {
             Image(
                 painter = painterResource(R.drawable.ic_menu_camera),
                 contentDescription = "Contact profile picture",
@@ -55,11 +79,15 @@ fun Greeting(msg: Message) {
             )
         }
 
-        Column {
+        //column 2- text-center
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.background(Color.Red)
+        ) {
             Text(
                 text = msg.author,
                 color = MaterialTheme.colors.secondaryVariant,
-                style = MaterialTheme.typography.subtitle2
+                style = MaterialTheme.typography.subtitle2,
             )
 
             // Add a horizontal space between the author text and book title
@@ -68,30 +96,183 @@ fun Greeting(msg: Message) {
                 text = msg.title,
                 style = MaterialTheme.typography.body2
             )
+
         }
 
-        Column {
+        //column 3
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            var isExpanded = false
+
             Text(text = msg.author)
-            Spacer(modifier = Modifier.height(8.dp))
-            Surface(shape = MaterialTheme.shapes.medium,color = Color.Yellow, elevation = 1.dp) {
+            Surface(
+                modifier = Modifier.clickable {/*action on clicked*/ },
+                shape = MaterialTheme.shapes.medium,
+                color = Color.Yellow,
+                elevation = 1.dp
+            ) {
                 Text(
                     text = msg.title,
-                    Modifier.padding(start =2.dp,end = 2.dp , top=2.dp, bottom=2.dp),
-                    color = Color(0xFFE91E63)
+                    Modifier.padding(start = 2.dp, end = 2.dp, top = 2.dp, bottom = 2.dp),
+                    color = Color(0xFFE91E63),
+                    maxLines = if (isExpanded) Int.MAX_VALUE else 1,
+                    style = MaterialTheme.typography.body1
                 )
             }
+        }
+
+        DisplayComments()
+
+    }
+
+
+    //Counter(text = "Counter", num = 0 )
+
+}
+
+@Composable
+//onAuthorClicked: (String) -> (Unit)
+fun Conversation(messages: List<Message>) {
+    LazyColumn {
+        //for each message display the message in the message card
+        items(messages) { message ->
+            //Message card component
+            MessageCard(message)
+        }
+    }
+}
+
+@Composable
+//order of calling property functions are sensitive
+// onClicked:  (String) -> (Unit)
+//offset(), acts like moving margin but its absolute.
+fun MessageCard(message: Message) {
+    Card(
+        modifier = Modifier
+            .border(1.dp, Color.Black, RectangleShape)
+            .padding(0.dp)
+            .width(60.dp),
+        shape = RoundedCornerShape(8.dp)
+    ) {
+        Text(
+            modifier = Modifier
+                .padding(5.dp)
+                .clickable {
+
+                },
+            text = message.title,
+
+        )
+    }
+    Spacer(modifier = Modifier.height(5.dp)) //used as margin
+}
+
+@Composable
+fun Counter(text: String, num: Int) {
+    var count by remember { mutableStateOf(0) }
+
+    Row() {
+        Column() {
+            Text(text = text, style = MaterialTheme.typography.caption)
+        }
+    }
+}
+
+@Composable
+fun DisplayComments() {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        val comments = ArrayList<Message>()
+
+        comments.add(Message("Dams", "RXT"))
+        comments.add(Message("Lams", "NORD"))
+        comments.add(Message("Bolly", "AVG"))
+
+        Conversation(messages = comments)
+    }
+}
+
+@Composable
+fun ImageCard(title:String, contentDescription:String, painter: Painter){
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(5.dp),
+        elevation = 1.dp
+    ){
+        //Box --> has a row and column by default
+        //With Image
+        Box(modifier = Modifier.height(200.dp)){
+            Image(
+                painter = painter,
+                contentDescription = contentDescription,
+                contentScale = ContentScale.Crop
+            ) //centerCrop
+
+            //Gradient
+            Box(modifier = Modifier
+                .fillMaxSize()
+                .background(
+                    Brush.verticalGradient(
+                        colors = listOf(Color.Transparent, Color.Black),
+                        startY = 300f
+                    )
+                )
+            )
+
+            //Text position
+            Box(modifier = Modifier
+                .fillMaxSize()
+                .padding(12.dp),
+                contentAlignment = Alignment.BottomStart
+                ){
+                Text(text = title, style= TextStyle(color = Color.White, fontSize = 12.sp) )
+            }
+
         }
 
     }
 }
 
-//Message Object
-data class Message(val author:String, val title:String)
+//Conversation(SampleData.conversationSample) takes a list of messages
 
-@Preview(name="Sign Up screen" ,showBackground = true)
+//Message Object
+data class Message(val author: String, val title: String)
+//
+
+@Preview(name = "Sign Up (Light Mode)", showBackground = true)
+@Preview(
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    showBackground = true,
+    name = "Sign Up (Dark Mode)"
+)
 @Composable
 fun DefaultPreview() {
+    val painter = painterResource(id = R.drawable.ic_launcher_background)
     AirMonitorTheme {
-        Greeting(Message("Roland","Two to tango"))
+        Surface(
+            modifier = Modifier
+                .fillMaxHeight()
+                .fillMaxWidth(),
+            color = MaterialTheme.colors.primary
+        ) {
+            Column() {
+                Greeting(Message("Roland", "Two to tango"))
+
+                //Take half the  width of the row
+                Box(modifier = Modifier.fillMaxWidth(0.5f)) {
+                    ImageCard(
+                        title = "Sweet Poison", contentDescription = "Hello",
+                        painter = painter
+                    )
+                }
+            }
+        }
     }
+}
+
+@Composable
+private fun loadLogin() {
+    val context = LocalContext.current
+
+    val intent = Intent(context, AirQualityNavigation::class.java)
+    intent.putExtra("Name", "Damola")
+    startActivity(context, intent, null)
 }
