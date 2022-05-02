@@ -33,6 +33,7 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
@@ -240,6 +241,7 @@ fun ImageCard(title: String, contentDescription: String, painter: Painter) {
 data class Message(val author: String, val title: String)
 //
 
+
 @Preview(name = "Sign Up (Light Mode)", showBackground = true)
 @Preview(
     uiMode = Configuration.UI_MODE_NIGHT_YES,
@@ -298,8 +300,12 @@ fun DefaultPreview() {
                 //RECOMPOSING -STATE
                 ColorBox(
                     modifier = Modifier
-                        .fillMaxSize()
+                        .width(400.dp)
+                        .height(200.dp)
                 )
+
+                //
+                counter()
             }
         }
     }
@@ -327,16 +333,22 @@ fun ColorBox(modifier: Modifier = Modifier) {
 
     }
 
+//    randomBox(Modifier.width(300.dp).height(200.dp)){
+//        colorState.value = it
+//    }
+
 }
 
 
-//Takes callback function to update outer components, works like props in react.js
+//Takes callback function to update ColorBox components when clicked, works like props in react.js
 @Composable
-fun randomBox(modifier: Modifier = Modifier, updateColorBoxColor:()-> Unit){
-    Box(modifier = Modifier
+fun randomBox(modifier: Modifier = Modifier, updateColorBoxColor:(color:Color)-> Unit){
+    Box(modifier = modifier
         .background(Color.Blue)
         .clickable {
-
+            updateColorBoxColor(
+                Color(Random.nextFloat(), Random.nextFloat(), Random.nextFloat())
+            )
         }
     ){
 
@@ -353,15 +365,20 @@ fun counter() {
         modifier = Modifier
             .background(Color.White)
             .border(2.dp, Color.Black, RectangleShape)
+            .fillMaxWidth(1f)
     ) {
-        Text(text = numCount.value.toString())
+        Text(text = numCount.value.toString(), color = Color.Black, fontSize = 20.sp,
+            textAlign = TextAlign.Center)
+    }
 
+    Row{
         Button(modifier = Modifier
             .background(Color.Red),
-            onClick = { numCount.value = numCount.value++ }) {
-            Text(text = "Click me !")
+            onClick = {  numCount.value++ }) {
+            Text(text = "Click me !", color = Color.White )
         }
     }
+
 }
 
 @Composable
