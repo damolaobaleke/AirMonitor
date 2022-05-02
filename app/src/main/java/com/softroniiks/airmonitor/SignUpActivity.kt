@@ -1,5 +1,6 @@
 package com.softroniiks.airmonitor
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
@@ -13,10 +14,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,7 +26,15 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -36,6 +42,9 @@ import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat.startActivity
 import com.example.airmonitor.ui.theme.AirMonitorTheme
 import com.softroniiks.airmonitor.views.AirQualityNavigation
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.random.Random
 
 class SignUpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,8 +59,10 @@ class SignUpActivity : AppCompatActivity() {
                     color = MaterialTheme.colors.primary
                 ) {
                     Greeting(Message("Roland", "Two to tango"))
-                    ImageCard(title = "Sweet Poison", contentDescription = "Hello",
-                        painter = painter )
+                    ImageCard(
+                        title = "Sweet Poison", contentDescription = "Hello",
+                        painter = painter
+                    )
                 }
 
             }
@@ -161,21 +172,11 @@ fun MessageCard(message: Message) {
                 },
             text = message.title,
 
-        )
+            )
     }
     Spacer(modifier = Modifier.height(5.dp)) //used as margin
 }
 
-@Composable
-fun Counter(text: String, num: Int) {
-    var count by remember { mutableStateOf(0) }
-
-    Row() {
-        Column() {
-            Text(text = text, style = MaterialTheme.typography.caption)
-        }
-    }
-}
 
 @Composable
 fun DisplayComments() {
@@ -191,15 +192,15 @@ fun DisplayComments() {
 }
 
 @Composable
-fun ImageCard(title:String, contentDescription:String, painter: Painter){
+fun ImageCard(title: String, contentDescription: String, painter: Painter) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(5.dp),
         elevation = 1.dp
-    ){
+    ) {
         //Box --> has a row and column by default
         //With Image
-        Box(modifier = Modifier.height(200.dp)){
+        Box(modifier = Modifier.height(200.dp)) {
             Image(
                 painter = painter,
                 contentDescription = contentDescription,
@@ -207,23 +208,25 @@ fun ImageCard(title:String, contentDescription:String, painter: Painter){
             ) //centerCrop
 
             //Gradient
-            Box(modifier = Modifier
-                .fillMaxSize()
-                .background(
-                    Brush.verticalGradient(
-                        colors = listOf(Color.Transparent, Color.Black),
-                        startY = 300f
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        Brush.verticalGradient(
+                            colors = listOf(Color.Transparent, Color.Black),
+                            startY = 300f
+                        )
                     )
-                )
             )
 
             //Text position
-            Box(modifier = Modifier
-                .fillMaxSize()
-                .padding(12.dp),
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(12.dp),
                 contentAlignment = Alignment.BottomStart
-                ){
-                Text(text = title, style= TextStyle(color = Color.White, fontSize = 12.sp) )
+            ) {
+                Text(text = title, style = TextStyle(color = Color.White, fontSize = 12.sp))
             }
 
         }
@@ -246,6 +249,12 @@ data class Message(val author: String, val title: String)
 @Composable
 fun DefaultPreview() {
     val painter = painterResource(id = R.drawable.ic_launcher_background)
+    val fontFamily = FontFamily(
+        Font(R.font.gilroy_bold, FontWeight.Bold),
+        Font(R.font.gilroy_regular, FontWeight.Normal),
+        Font(R.font.gilroy_medium, FontWeight.Medium),
+    )
+
     AirMonitorTheme {
         Surface(
             modifier = Modifier
@@ -253,7 +262,7 @@ fun DefaultPreview() {
                 .fillMaxWidth(),
             color = MaterialTheme.colors.primary
         ) {
-            Column() {
+            Column {
                 Greeting(Message("Roland", "Two to tango"))
 
                 //Take half the  width of the row
@@ -263,7 +272,94 @@ fun DefaultPreview() {
                         painter = painter
                     )
                 }
+
+                //
+                Text(
+                    text = buildAnnotatedString {
+                        withStyle(
+                            style = SpanStyle(
+                                color = Color.Red,
+                                fontSize = 50.sp
+                            )
+                        ) {
+                            append("H")
+                        }
+                        append("ello")
+                    },
+                    style = TextStyle(
+                        fontFamily = fontFamily,
+                        fontStyle = FontStyle.Normal,
+                        fontWeight = FontWeight.Medium,
+                        textDecoration = TextDecoration.Underline,
+                    )
+                )
+
+
+                //RECOMPOSING -STATE
+                ColorBox(
+                    modifier = Modifier
+                        .fillMaxSize()
+                )
             }
+        }
+    }
+}
+
+
+//when you change state or recompose and func is called again,
+// the color would be set back to yellow. so to fix, use remember keyword
+//REMEMBER -->  means remember the value of the state from the last composition
+//so when Box is recomposed don't reset the value to yellow again
+@Composable
+fun ColorBox(modifier: Modifier = Modifier) {
+    val colorState = remember {
+        mutableStateOf(Color.Yellow)
+    }
+
+    Box(modifier = modifier
+        .background(colorState.value)
+        .clickable {
+            //Color(Random.nextFloat(), Random.nextFloat(), Random.nextFloat()) //random color
+            colorState.value = Color.Red //change to red
+        }
+
+    ) {
+
+    }
+
+}
+
+
+//Takes callback function to update outer components, works like props in react.js
+@Composable
+fun randomBox(modifier: Modifier = Modifier, updateColorBoxColor:()-> Unit){
+    Box(modifier = Modifier
+        .background(Color.Blue)
+        .clickable {
+
+        }
+    ){
+
+    }
+}
+
+@Composable
+fun counter() {
+    val numCount = remember {
+        mutableStateOf(0)
+    }
+
+    Box(
+        modifier = Modifier
+            .background(Color.White)
+            .border(2.dp, Color.Black, RectangleShape)
+    ) {
+        Text(text = numCount.value.toString())
+
+        Button(modifier = Modifier
+            .background(Color.Red),
+            onClick = { numCount.value = numCount.value++ }) {
+            Text(text = "Click me !")
         }
     }
 }
