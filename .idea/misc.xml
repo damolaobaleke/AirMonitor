@@ -8,11 +8,28 @@
         <entry key="../../../../layout/compose-model-1627824220648.xml" value="0.7282282282282282" />
         <entry key="../../../../layout/compose-model-1627903918139.xml" value="0.758998435054773" />
         <entry key="../../../../layout/compose-model-1627905099240.xml" value="0.625" />
+        <entry key="../../../../layout/compose-model-1650930637078.xml" value="0.7587859424920128" />
+        <entry key="../../../../layout/compose-model-1650932129984.xml" value="0.67" />
+        <entry key="../../../../layout/compose-model-1650942802838.xml" value="0.33" />
+        <entry key="../../../../layout/compose-model-1651047488954.xml" value="0.33" />
+        <entry key="../../../../layout/compose-model-1651456826938.xml" value="0.26055743243243246" />
+        <entry key="../../../../layout/compose-model-1651789007390.xml" value="0.25" />
+        <entry key="../../../../layout/compose-model-1651789312527.xml" value="0.13482441471571907" />
+        <entry key="../../../../layout/compose-model-1652147894685.xml" value="0.2719594594594595" />
+        <entry key="../../../../layout/compose-model-1652167786972.xml" value="0.2719594594594595" />
+        <entry key="../../../../layout/compose-model-1652323904726.xml" value="0.25" />
+        <entry key="../../../../layout/compose-model-1652324255799.xml" value="0.27280405405405406" />
+        <entry key="../../../../layout/compose-model-1652382188343.xml" value="0.2609797297297297" />
+        <entry key="../../../../layout/compose-model-1652401363217.xml" value="0.25" />
+        <entry key="../../../../layout/compose-model-1652471664918.xml" value="0.27280405405405406" />
+        <entry key="../../../../layout/compose-model-1652481237478.xml" value="0.27280405405405406" />
+        <entry key="../../../../layout/compose-model-1652481621355.xml" value="0.165" />
+        <entry key="../../../../layout/compose-model-1653608709148.xml" value="0.25" />
         <entry key="..\:/AirMonitor/app/src/main/res/layout/activity_main.xml" value="0.22447916666666667" />
         <entry key="..\:/AirMonitor/app/src/main/res/layout/content_air_quality_navigation.xml" value="0.22447916666666667" />
       </map>
     </option>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_16_PREVIEW" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>

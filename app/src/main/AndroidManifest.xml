@@ -10,16 +10,33 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AirMonitor">
         <activity
-            android:name="com.softroniiks.airmonitor.views.AirQualityNavigation"
+            android:name=".MainActivityTwo"
+            android:exported="false"
+            android:label="@string/title_activity_main_two"
+            android:theme="@style/Theme.AirMonitor" />
+        <activity
+            android:name=".ConstraintLayout"
+            android:exported="false"
+            android:label="@string/title_activity_constraint_layout"
+            android:theme="@style/Theme.AirMonitor" />
+        <activity
+            android:name=".TextFields"
+            android:exported="false"
+            android:label="@string/title_activity_text_fields"
+            android:theme="@style/Theme.AirMonitor" />
+        <activity
+            android:name=".views.AirQualityNavigation"
             android:exported="true"
             android:label="@string/title_activity_air_quality_navigation"
             android:theme="@style/Theme.AirMonitor.NoActionBar" />
         <activity
-            android:name="com.softroniiks.airmonitor.SignUpActivity"
+            android:name=".SignUpActivity"
             android:exported="true"
             android:label="@string/title_activity_sign_up"
             android:theme="@style/Theme.AirMonitor.NoActionBar" />
-        <activity android:name="com.softroniiks.airmonitor.MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
