@@ -361,13 +361,17 @@ fun counter() {
         mutableStateOf(0)
     }
 
+    //center align
     Box(
         modifier = Modifier
             .background(Color.White)
             .border(2.dp, Color.Black, RectangleShape)
+            .padding(8.dp)
             .fillMaxWidth(1f)
+
     ) {
-        Text(text = numCount.value.toString(), color = Color.Black, fontSize = 20.sp,
+        Text(modifier = Modifier.padding(8.dp),
+            text = numCount.value.toString(), color = Color.Black, fontSize = 20.sp,
             textAlign = TextAlign.Center)
     }
 
@@ -376,6 +380,13 @@ fun counter() {
             .background(Color.Red),
             onClick = {  numCount.value++ }) {
             Text(text = "Click me !", color = Color.White )
+        }
+        Spacer(modifier = Modifier.height(5.dp))
+        
+        Button(modifier = Modifier
+            .background(Color.White),
+            onClick = {  numCount.value = 0 }) {
+            Text(text = "Reset!", color = Color.White )
         }
     }
 
